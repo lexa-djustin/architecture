@@ -1,0 +1,10 @@
+index:
+  route: /
+  methods: GET
+  class: App\Controller\Main
+  method: index
+blog:
+  route: /blog/{blog:\d+}/{id:\d+}
+  methods: GET
+  class: App\Controller\Main
+  method: index
