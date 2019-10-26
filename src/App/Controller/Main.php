@@ -4,14 +4,21 @@ namespace App\Controller;
 
 use Core\HttpHandler\AbstractHttpHandler;
 use Zend\Diactoros\Response\HtmlResponse;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Twig\Environment;
 
 class Main extends AbstractHttpHandler
 {
-    public function index()
-    {
-        var_dump($this->request->getAttribute('blog'));
-        exit();
+    private $twig;
 
-        exit(__CLASS__ . ':' . __FUNCTION__);
+    public function __construct(Environment $twig)
+    {
+        $this->twig = $twig;
+    }
+
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        return new HtmlResponse($this->twig->render('main.html'));
     }
 }

@@ -2,15 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: Alex
- * Date: 29.09.2019
- * Time: 13:32
+ * Date: 26.10.2019
+ * Time: 19:43
  */
 
-namespace Core\HttpHandler\Factory;
+namespace Core\Factory;
 
-use Core\HttpHandler\AbstractHttpHandler;
-
-class HttpHandlerFactory implements HttpHandlerFactoryInterface
+class SimpleFactory implements FactoryInterface
 {
     /**
      * @param string $name
@@ -18,15 +16,17 @@ class HttpHandlerFactory implements HttpHandlerFactoryInterface
      * @return AbstractHttpHandler
      * @throws HttpHandlerWasNotFoundException
      */
-    public function createHttpHandler(string $name): AbstractHttpHandler
+    public function create(string $name = null): object
     {
-        if (!class_exists($name)){
+        /*
+        if (!class_exists($name)) {
             throw new HttpHandlerWasNotFoundException(printf(
                 'Class with name "%s" was not found',
                 $name
             ));
         }
+        */
 
-        return new $name;
+        return new $name();
     }
 }

@@ -18,13 +18,6 @@ class Route
 
     private $handler;
 
-    /**
-     * Route constructor.
-     *
-     * @param array $methods
-     * @param string $route
-     * @param string $handler
-     */
     public function __construct(array $methods, string $route, string $handler)
     {
         $this->route = $route;

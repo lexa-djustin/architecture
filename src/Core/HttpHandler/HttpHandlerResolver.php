@@ -9,35 +9,33 @@
 namespace Core\HttpHandler;
 
 use Core\Router\RouteMatch;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Container\ContainerInterface;
 
 class HttpHandlerResolver
 {
     /**
-     * @var Factory\HttpHandlerFactoryInterface
+     * @var ContainerInterface
      */
-    private $httpHandlerFactory;
+    private $container;
 
-    /**
-     * HttpHandlerResolver constructor.
-     * @param Factory\HttpHandlerFactoryInterface $httpHandlerFactory
-     */
-    public function __construct(Factory\HttpHandlerFactoryInterface $httpHandlerFactory)
+    public function __construct(ContainerInterface $container)
     {
-        $this->httpHandlerFactory = $httpHandlerFactory;
+        $this->container = $container;
     }
 
     /**
      * @param ServerRequestInterface $request
      * @param RouteMatch $result
+     *
+     * @return ResponseInterface
      */
-    public function resolve(ServerRequestInterface $request, RouteMatch $result): void
+    public function resolve(ServerRequestInterface $request, RouteMatch $result): ResponseInterface
     {
         [$class, $method] = explode(':', $result->handler());
 
-        $handler = $this->httpHandlerFactory->createHttpHandler($class);
-        $handler->setRequest($request);
-
-        $handler->{$method}();
+        $handler = $this->container->get($class);
+        return $handler->handle($request);
     }
 }

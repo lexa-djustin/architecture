@@ -6,5 +6,7 @@ ini_set('display_startup_errors', 1);
 
 require 'vendor/autoload.php';
 
+define('ROOT_DIRECTORY', __DIR__);
+
 $application = new Core\Application();
 $application->run();

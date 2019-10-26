@@ -26,13 +26,6 @@ class RouteMatch
      */
     private $tokens;
 
-    /**
-     * RouteMatch constructor.
-     *
-     * @param string $route
-     * @param string $handler
-     * @param array $tokens
-     */
     public function __construct(string $route, string $handler, array $tokens)
     {
         $this->route = $route;

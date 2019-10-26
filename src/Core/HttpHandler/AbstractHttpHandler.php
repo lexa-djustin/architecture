@@ -8,35 +8,9 @@
 
 namespace Core\HttpHandler;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class AbstractHttpHandler implements HttpHandlerInterface
+abstract class AbstractHttpHandler implements RequestHandlerInterface
 {
-    /**
-     * @var ServerRequestInterface
-     */
-    protected $request;
 
-    /**
-     * @var ResponseInterface
-     */
-    protected $response;
-
-    /**
-     * @param ServerRequestInterface $request
-     */
-    public function setRequest(ServerRequestInterface $request): void
-    {
-        $this->request = $request;
-    }
-
-
-    /**
-     * @param ResponseInterface $response
-     */
-    public function setResponse(ResponseInterface $response): void
-    {
-        $this->response = $response;
-    }
 }
